@@ -37,11 +37,23 @@ function Square(props) {
          onClick={()=>this.props.onClick(i)}
       />;
     }
-    
+    getColumns(rowNumber) {
+      const cols = [0,1,2];
+      const colsDiv = cols.map((col) => {
+        return this.renderSquare(rowNumber*3+col);
+      })
+      return colsDiv;
+    }
     render() {
+       const rows = [0,1,2];
+       const divRows = rows.map((row) => {
+         return <div className="board-row">{this.getColumns(row)}</div>
+       })
        return (
         <div>
-          {/*<div className="status">{this.props.status}</div>*/}
+          {divRows}
+          {/*<div className="status">{this.props.status}</div>
+          {}
           <div className="board-row">
             {this.renderSquare(0)}
             {this.renderSquare(1)}
@@ -59,7 +71,7 @@ function Square(props) {
             {this.renderSquare(7)}
             {this.renderSquare(8)}
             {this.renderSquare(11)}
-          </div>
+          </div>*/}
         </div>
       );
     }
@@ -86,11 +98,10 @@ function Square(props) {
            stepNumber: history.length});
      }
      computeStatus(win, isxnext) {
+      let next = isxnext?"Y":"X";
       if (win) { 
-        let winner = isxnext?"X":"Y";
-        return  `There is a winner ! and the winner is: ${(winner)}`}
+        return  `There is a winner ! and the winner is: ${next}`}
       else {
-        let next = isxnext?"Y":"X";
         return `Next player: ${next}`;}
 
      }
