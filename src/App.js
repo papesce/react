@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import FetchTest from "./components/FetchTest"
+import FetchPeople from "./container/FetchPeople"
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <FetchTest/>
+        <FetchPeople/>
       </div>
     );
   }
