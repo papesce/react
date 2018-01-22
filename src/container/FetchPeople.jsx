@@ -1,25 +1,34 @@
 import React from "react";
 import PeopleView from "../components/PeopleView"
+import {connect} from "react-redux"
+import {getPeopleStarted, getPeopleAsync} from "../redux/store"
 
 class FetchTestCont extends React.Component {
 
- state = { loading: true} 
+ // state = { loading: true} 
  componentDidMount() {
-   fetch("https://swapi.co/api/people/").then((resp)=>resp.json())
-   .then(
-    data => this.setState({loading:false, data}), 
-    error => this.setState({loading : false, error}))
+   const {dispatch} = this.props;
+   // dispatch(getPeopleStarted)
+   dispatch(getPeopleAsync)
+  //  fetch("https://swapi.co/api/people/").then((resp)=>resp.json())
+  //  .then(
+  //   data => this.setState({loading:false, data}), 
+  //   error => this.setState({loading : false, error}))
  }
  render(){
-   const {loading, error, data = {}} = this.state;
+   const {loading, error, peopleList = [] } = this.props;
    // debugger;
    return (
      <div>
-       <PeopleView loading={loading} error={error} peopleL={data.results}/>
+       <PeopleView loading={loading} error={error} peopleL={peopleList}/>
      </div>
    )
  } 
   
 }
 
-export default FetchTestCont
+const mapStateToProps = (state) => ({
+  ...state.peopleView
+})
+
+export default connect(mapStateToProps)(FetchTestCont)

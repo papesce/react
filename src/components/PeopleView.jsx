@@ -11,9 +11,12 @@ class PeopleView extends React.Component {
       // debugger;
       if (loading) {return <Loading />}
       if (error) {return <Error error={error}/>}
+      if (peopleL) {
       return (
         <div><PeopleList peopleL={peopleL}/></div>
       )
+      }
+      return <div>initializing...</div>
     }
 }
 

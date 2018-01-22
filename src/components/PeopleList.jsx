@@ -6,7 +6,7 @@ const PeopleList = ({peopleL}) => {
   <div>
     <ul>
     {peopleL.map((people, index) => {
-      return <li>
+      return <li key={index}>
          <People people={people}/>
       </li>
     })}
